@@ -25,15 +25,5 @@
 
     <issueHandlers>
         <LessSpecificReturnType errorLevel="info"/>
-        <DocblockTypeContradiction>
-            <errorLevel type="suppress">
-                <directory name="tests/Mock/Vk"/>
-            </errorLevel>
-        </DocblockTypeContradiction>
-        <PropertyNotSetInConstructor>
-            <errorLevel type="suppress">
-                <directory name="tests/Mock/Vk"/>
-            </errorLevel>
-        </PropertyNotSetInConstructor>
     </issueHandlers>
 </psalm>
