@@ -9,8 +9,6 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\App;
 use Slim\Psr7\Factory\ServerRequestFactory;
-use Test\Mock\Vk\VkApiClientMock;
-use VK\Client\VKApiClient;
 
 /**
  * @internal
@@ -18,12 +16,6 @@ use VK\Client\VKApiClient;
 abstract class WebTestCase extends TestCase
 {
     private ?App $app = null;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->vk()->getRequest()->reset();
-    }
 
     protected function tearDown(): void
     {
@@ -60,15 +52,6 @@ abstract class WebTestCase extends TestCase
             $this->app = (require __DIR__ . '/../../config/app.php')($this->container());
         }
         return $this->app;
-    }
-
-    protected function vk(): VkApiClientMock
-    {
-        /**
-         * @var VkApiClientMock
-         * @psalm-suppress PossiblyNullReference
-         */
-        return $this->app()->getContainer()->get(VkApiClient::class);
     }
 
     private function container(): ContainerInterface
