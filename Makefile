@@ -1,10 +1,7 @@
 init: docker-down-clear \
 	api-clear \
-	frontend-clear \
 	docker-pull docker-build docker-up \
-	api-init \
-	frontend-init \
-	frontend-ready
+	api-init
 up: docker-up
 down: docker-down
 restart: down up
@@ -14,7 +11,7 @@ test: api-test
 lint: api-lint
 analyze: api-analyze
 cs-fix: api-cs-fix
-update-deps: frontend-yarn-upgrade api-composer-update restart
+update-deps: api-composer-update restart
 
 docker-up:
 	docker-compose up -d
@@ -57,17 +54,3 @@ api-analyze:
 
 api-cs-fix:
 	docker-compose run --rm api-php-cli composer php-cs-fixer fix
-
-frontend-clear:
-	docker run --rm -v ${PWD}/frontend:/app -w /app alpine sh -c 'rm -rf .ready build'
-
-frontend-init: frontend-yarn-install
-
-frontend-yarn-install:
-	docker-compose run --rm frontend-node-cli yarn install
-
-frontend-yarn-upgrade:
-	docker-compose run --rm frontend-node-cli yarn upgrade
-
-frontend-ready:
-	docker run --rm -v ${PWD}/frontend:/app -w /app alpine touch .ready
