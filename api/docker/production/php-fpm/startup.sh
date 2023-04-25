@@ -1,7 +1,7 @@
 #!/bin/sh
 
 sed -i "s/80/${PORT}/g" /etc/nginx/http.d/default.conf
-sed -i "s/bot-php-fpm/127.0.0.1/g" /etc/nginx/http.d/default.conf
+sed -i "s/api-php-fpm/127.0.0.1/g" /etc/nginx/http.d/default.conf
 
 php-fpm -D
 
