@@ -3,6 +3,8 @@
 namespace App\Http\Action\Telegram;
 
 use App\Http\Response\PlainTextResponse;
+use Discord\Builders\MessageBuilder;
+use Discord\Parts\Channel\Channel;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -13,7 +15,8 @@ use Throwable;
 class WebhookAction implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly Client $bot
+        private readonly Client $bot,
+        private readonly Channel $discord,
     ) {
     }
 
@@ -24,8 +27,10 @@ class WebhookAction implements RequestHandlerInterface
     {
         $this->bot->on(function (Update $update) {
             $message = $update->getMessage();
-            $id = $message->getChat()->getId();
-            $this->bot->sendMessage($id, 'Your message: ' . $message->getText());
+            $this->discord->sendMessage(
+                MessageBuilder::new()
+                    ->setContent("{$message->getFrom()->getFirstName()}:  {$message->getText()}")
+            );
         }, function () {
             return true;
         });

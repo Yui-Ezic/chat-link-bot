@@ -26,6 +26,9 @@ services:
             PHP_IDE_CONFIG: serverName=api
             SENTRY_DSN: ''
             TELEGRAM_API_TOKEN: ''
+            DISCORD_API_TOKEN: ''
+            DISCORD_GUILD_ID: ''
+            DISCORD_CHANNEL_ID: ''
 
     api-php-cli:
         build:
@@ -38,4 +41,7 @@ services:
             APP_DEBUG: 1
             SENTRY_DSN: ''
             TELEGRAM_API_TOKEN: ''
+            DISCORD_API_TOKEN: ''
+            DISCORD_GUILD_ID: ''
+            DISCORD_CHANNEL_ID: ''
 

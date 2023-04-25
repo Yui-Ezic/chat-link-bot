@@ -17,6 +17,7 @@
         "sentry/sdk": "^3.2",
         "slim/psr7": "^1.5",
         "slim/slim": "4.*",
+        "team-reflex/discord-php": "^7.3",
         "telegram-bot/api": "^2.3"
     },
     "require-dev": {
