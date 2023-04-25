@@ -25,6 +25,7 @@ services:
             APP_DEBUG: 1
             PHP_IDE_CONFIG: serverName=api
             SENTRY_DSN: ''
+            TELEGRAM_API_TOKEN: ''
 
     api-php-cli:
         build:
@@ -36,4 +37,5 @@ services:
             APP_ENV: dev
             APP_DEBUG: 1
             SENTRY_DSN: ''
+            TELEGRAM_API_TOKEN: ''
 
