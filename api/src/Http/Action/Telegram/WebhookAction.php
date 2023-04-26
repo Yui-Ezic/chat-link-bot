@@ -2,9 +2,8 @@
 
 namespace App\Http\Action\Telegram;
 
+use App\Discord\Channel;
 use App\Http\Response\PlainTextResponse;
-use Discord\Builders\MessageBuilder;
-use Discord\Parts\Channel\Channel;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -27,10 +26,7 @@ class WebhookAction implements RequestHandlerInterface
     {
         $this->bot->on(function (Update $update) {
             $message = $update->getMessage();
-            $this->discord->sendMessage(
-                MessageBuilder::new()
-                    ->setContent("{$message->getFrom()->getFirstName()}:  {$message->getText()}")
-            );
+            $this->discord->sendMessage("{$message->getFrom()->getFirstName()}:  {$message->getText()}");
         }, function () {
             return true;
         });
