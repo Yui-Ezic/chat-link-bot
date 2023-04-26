@@ -15,7 +15,7 @@ class WebhookAction implements RequestHandlerInterface
 {
     public function __construct(
         private readonly Client $bot,
-        private readonly Channel $discord,
+        private readonly Channel $discord
     ) {
     }
 
@@ -26,7 +26,9 @@ class WebhookAction implements RequestHandlerInterface
     {
         $this->bot->on(function (Update $update) {
             $message = $update->getMessage();
-            $this->discord->sendMessage("{$message->getFrom()->getFirstName()}:  {$message->getText()}");
+            if ($message) {
+                $this->discord->sendMessage("{$message->getFrom()->getFirstName()}:  {$message->getText()}");
+            }
         }, function () {
             return true;
         });
