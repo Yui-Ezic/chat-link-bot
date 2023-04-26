@@ -26,7 +26,7 @@ class WebhookAction implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $this->logger->debug('Telegram webhook called.', [
+        $this->logger->info('Telegram webhook called.', [
             'requestBody' => (string)$request->getBody()
         ]);
         $this->bot->on(function (Update $update) {
