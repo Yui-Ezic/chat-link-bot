@@ -2,6 +2,7 @@
 
 namespace App\Http\Action\Discord;
 
+use App\Http\Response\EmptyResponse;
 use App\Http\Response\JsonResponse;
 use App\Http\Response\PlainTextResponse;
 use JsonException;
@@ -26,11 +27,16 @@ class InteractionsAction implements RequestHandlerInterface
             'requestBody' => (string)$request->getBody()
         ]);
         $interaction = $request->getParsedBody();
-        if ($interaction['type'] === 1) {
-            return new JsonResponse([
+        return match ($interaction['type']) {
+            // InteractionType::Ping
+            1 => new JsonResponse([
                 'type' => 1
-            ]);
-        }
-        return new PlainTextResponse('Ok');
+            ]),
+            // InteractionType::ApplicationCommand
+            2 => new JsonResponse([
+                'type' => 2
+            ]),
+            default => new EmptyResponse(400),
+        };
     }
 }
