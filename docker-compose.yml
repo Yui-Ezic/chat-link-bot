@@ -28,6 +28,7 @@ services:
             TELEGRAM_API_TOKEN: ''
             DISCORD_API_TOKEN: ''
             DISCORD_CHANNEL_ID: ''
+            DISCORD_PUBLIC_KEY: ''
 
     api-php-cli:
         build:
@@ -42,4 +43,4 @@ services:
             TELEGRAM_API_TOKEN: ''
             DISCORD_API_TOKEN: ''
             DISCORD_CHANNEL_ID: ''
-
+            DISCORD_PUBLIC_KEY: ''
