@@ -31,6 +31,9 @@ class WebhookAction implements RequestHandlerInterface
         ]);
         $webhook = $request->getParsedBody();
         $message = $webhook['message'];
+        if ($message['from'] === 'LinkChatsBot') {
+            return new EmptyResponse(200);
+        }
         $this->telegram->sendMessage($this->chatId, "{$message['from']}: {$message['text']}");
         return new EmptyResponse(200);
     }
