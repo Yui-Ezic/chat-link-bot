@@ -13,7 +13,7 @@ return [
     'config' => [
         'telegram' => [
             'token' => env('TELEGRAM_API_TOKEN'),
-            'chat_id' => env('CHAT_ID')
+            'chat_id' => env('TELEGRAM_CHAT_ID')
         ],
     ],
 ];
