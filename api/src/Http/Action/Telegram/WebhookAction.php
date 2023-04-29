@@ -29,6 +29,11 @@ class WebhookAction implements RequestHandlerInterface
         $this->logger->info('Telegram webhook called.', [
             'requestBody' => (string)$request->getBody()
         ]);
+        $update = $request->getParsedBody();
+        // fix 500 error when gifs
+        if (!empty($update['message']['animation']) || !empty($update['message']['document'])) {
+            return new PlainTextResponse('Ok');
+        }
         $this->bot->on(function (Update $update) {
             $message = $update->getMessage();
             if ($message) {
