@@ -10,4 +10,5 @@ return static function (App $app): void {
     $app->post('/telegram', Http\Action\Telegram\WebhookAction::class);
     $app->post('/discord', Http\Action\Discord\InteractionsAction::class)
         ->add(Http\Middleware\Discord\VerifySignature::class);
+    $app->post('/discord/webhook', Http\Action\Discord\WebhookAction::class);
 };
